@@ -27,4 +27,14 @@ public class ResultMatchGamePopup : MonoBehaviour
 
         AvgTimeLabel.text = avgTime.ToString("0.##") + " s";
     }
+
+    private void Restart()
+    {
+        MatchGameManager.Instance.Restart();
+    }
+
+    private void PlayNextLevel()
+    {
+        MatchGameManager.Instance.PlayNextLevel();
+    }
 }

@@ -3,20 +3,39 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using System.Threading.Tasks;
+using UnityEngine.SceneManagement;
 
 public class MatchGameManager : MonoBehaviour
 {
+    public static MatchGameManager Instance { get; private set; }
+
     [SerializeField] private List<Slot> slots;
 
     [SerializeField] private GameObject RecordPopup;
     private RectTransform RecordPopupPanel;
 
     [SerializeField] private CanvasGroup CanvasGround;//dark background
+
+    [Header("Scene")]
+    [SerializeField] private string NextLevel;
     private Vector2 DefaultStartPosition = new Vector2(0.0f, 2000f);
     private int numberMatchedItems = 0;
+
+    private void Awake()
+    {
+        if(Instance)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            Instance = this;
+        }
+    }
+
     private void OnEnable()
     {
-        foreach(var slot in slots)
+        foreach (var slot in slots)
         {
             slot.OnMatched += OnItemMatch;
         }
@@ -40,7 +59,7 @@ public class MatchGameManager : MonoBehaviour
     {
         numberMatchedItems++;
         Debug.Log("numberMatchedItems" + numberMatchedItems);
-        if(numberMatchedItems == slots.Count)
+        if (numberMatchedItems == slots.Count)
         {
             //Show resultPopup
             //RecordPopup.SetActive(true);
@@ -57,7 +76,7 @@ public class MatchGameManager : MonoBehaviour
     public async void CloseRecordPopup()
     {
         await RecordPopupOuttro();
-       // RecordPopupPanel.anchoredPosition = DefaultStartPosition;
+        // RecordPopupPanel.anchoredPosition = DefaultStartPosition;
         //Popups.SetActive(false);
         RecordPopup.SetActive(false);
     }
@@ -75,4 +94,15 @@ public class MatchGameManager : MonoBehaviour
         //await MusicSettingPopupPanel.DOAnchorPosY(DefaultEndPosition.y, duration).SetUpdate(true).AsyncWaitForCompletion();
         await RecordPopupPanel.DOAnchorPosY(1000f, 1f).SetEase(Ease.InOutQuint).AsyncWaitForCompletion();
     }
+
+    public void Restart()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void PlayNextLevel()
+    {
+        SceneManager.LoadScene(NextLevel);
+    }
+
 }
