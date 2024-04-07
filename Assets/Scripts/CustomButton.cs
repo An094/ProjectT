@@ -26,9 +26,14 @@ public class CustomButton : MonoBehaviour
         Button.onClick.RemoveAllListeners();
     }
 
-    private void Start()
+    private void Awake()
     {
         Icon = Button.GetComponent<Image>();
+    }
+
+    private void Start()
+    {
+        
         SetDefautState();
     }
     public void SetIcon(Sprite InSprite)

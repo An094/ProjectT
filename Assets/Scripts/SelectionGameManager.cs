@@ -1,7 +1,9 @@
+using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -25,6 +27,16 @@ public class SelectionGameManager : MonoBehaviour
     private List<int> playedSoundIndex;
     private List<int> PlayedSetIndex;
     private string currentAnimal;
+
+    private int currentRound = 0;
+    private Vector2 DefaultStartPosition = new Vector2(0.0f, 2000f);
+
+    //
+    [Header("Popup")]
+    [SerializeField] private GameObject RecordPopup;
+    private RectTransform RecordPopupPanel;
+
+    [SerializeField] private CanvasGroup CanvasGround;//dark background
 
     private bool PickRandomSoundSfx(ref string OutName)
     {
@@ -67,6 +79,8 @@ public class SelectionGameManager : MonoBehaviour
         playedSoundIndex = new List<int>();
 
         PlayedSetIndex = new List<int>();
+        RecordPopupPanel = RecordPopup.GetComponent<RectTransform>();
+
         Setup();
 
     }
@@ -88,6 +102,8 @@ public class SelectionGameManager : MonoBehaviour
             customButtons[i].SetDefautState();
         }
 
+        RecordPopupPanel.anchoredPosition = DefaultStartPosition;
+        currentRound++;
     }
 
     private int PickRadomSet()
@@ -113,6 +129,7 @@ public class SelectionGameManager : MonoBehaviour
     public void PlayerSound()
     {
         AudioManager.Instance.PlaySFX(currentAnimal);
+        TimeManager.instance.StartTimer(currentRound.ToString());
     }
 
     public void OnCustomButtonClicked(CustomButton InButton)
@@ -123,6 +140,7 @@ public class SelectionGameManager : MonoBehaviour
         }
         else
         {
+            TimeManager.instance.StopTimer(currentRound.ToString());
             InButton.SetResult(true);
             StartCoroutine(CorrectAnswer());   
         }
@@ -131,7 +149,43 @@ public class SelectionGameManager : MonoBehaviour
     IEnumerator CorrectAnswer()
     {
         AudioManager.Instance.PlaySFX("Votay");
-        yield return new WaitForSeconds(3f);
-        Setup();
+        yield return new WaitForSeconds(4f);
+        
+        if(currentRound == 4)
+        {
+            OpenRecordPopup();
+        }
+        else
+        {
+            Setup();
+        }
+    }
+
+    public void OpenRecordPopup()
+    {
+        RecordPopup.SetActive(true);
+        RecordPopupIntro();
+    }
+
+    public async void CloseRecordPopup()
+    {
+        await RecordPopupOuttro();
+        // RecordPopupPanel.anchoredPosition = DefaultStartPosition;
+        //Popups.SetActive(false);
+        RecordPopup.SetActive(false);
+    }
+
+    private void RecordPopupIntro()
+    {
+        CanvasGround.DOFade(1, 1.0f).SetUpdate(true);
+        //MusicSettingPopupPanel.DOAnchorPosY(0, duration).SetUpdate(true);
+        RecordPopupPanel.DOAnchorPosY(0, 1f).SetEase(Ease.OutQuint);
+    }
+
+    private async Task RecordPopupOuttro()
+    {
+        CanvasGround.DOFade(0, 1f).SetUpdate(true);
+        //await MusicSettingPopupPanel.DOAnchorPosY(DefaultEndPosition.y, duration).SetUpdate(true).AsyncWaitForCompletion();
+        await RecordPopupPanel.DOAnchorPosY(1000f, 1f).SetEase(Ease.InOutQuint).AsyncWaitForCompletion();
     }
 }

@@ -1021,7 +1021,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3946596379538706042, guid: 6950dd0afa670f94c8a4275cc05ca86a, type: 3}
       propertyPath: NextLevel
-      value: Level1_3
+      value: Level2
       objectReference: {fileID: 0}
     - target: {fileID: 3946596379538706042, guid: 6950dd0afa670f94c8a4275cc05ca86a, type: 3}
       propertyPath: RecordPopup
