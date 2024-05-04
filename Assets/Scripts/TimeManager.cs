@@ -1,8 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TimeManager : MonoBehaviour
+public class TimeManager : MonoBehaviour, IDataPersistence
 {
     public static TimeManager instance;
 
@@ -54,5 +55,29 @@ public class TimeManager : MonoBehaviour
             return timers[name].EndTime - timers[name].StartTime;
         }
         return 0;
+    }
+
+    public void LoadData(GameData data)
+    {
+        foreach (var timer in data.LevelData)
+        {
+            timers[timer.Name].StartTime = timer.StartTime;
+            timers[timer.Name].EndTime = timer.EndTime;
+        }
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        int index = 0;
+        foreach (var timer in timers)
+        {
+            LevelData level2Data = new LevelData();
+            level2Data.Name = timer.Key;
+            level2Data.StartTime = timer.Value.StartTime;
+            level2Data.EndTime = timer.Value.EndTime;
+            level2Data.Duration = level2Data.EndTime - level2Data.StartTime;
+            data.LevelData.Add(level2Data);
+            index++;
+        }
     }
 }

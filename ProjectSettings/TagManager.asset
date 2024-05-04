@@ -9,6 +9,11 @@ TagManager:
   - Triangle
   - Hexagon
   - Rectangle
+  - Monkey
+  - Sheep
+  - Owl
+  - Rabbit
+  - Porcupine
   layers:
   - Default
   - TransparentFX
