@@ -33,12 +33,12 @@ public class CustomButton : MonoBehaviour
 
     private void Start()
     {
-        
         SetDefautState();
     }
     public void SetIcon(Sprite InSprite)
     {
         Icon.sprite = InSprite;
+        Icon.SetNativeSize();        
     }
 
     public void SetResult(bool IsCorrect)

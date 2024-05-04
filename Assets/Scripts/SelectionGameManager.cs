@@ -151,7 +151,7 @@ public class SelectionGameManager : MonoBehaviour
         AudioManager.Instance.PlaySFX("Votay");
         yield return new WaitForSeconds(4f);
         
-        if(currentRound == 4)
+        if(currentRound == 3)
         {
             OpenRecordPopup();
         }
