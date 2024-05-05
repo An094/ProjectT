@@ -60,6 +60,7 @@ public class FileDataHandler
 
             //write the serialized data to the file
             using (FileStream stream = new FileStream(fullPath, FileMode.Append))
+            //using (FileStream stream = new FileStream(fullPath, FileMode.Open))
             {
                 using (StreamWriter writer = new StreamWriter(stream))
                 {

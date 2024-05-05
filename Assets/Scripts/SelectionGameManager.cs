@@ -19,7 +19,7 @@ public class QnASet
     }
 }
 
-public class SelectionGameManager : MonoBehaviour
+public class SelectionGameManager : MonoBehaviour, IDataPersistence
 {
     [SerializeField] List<CustomButton> customButtons;
     [SerializeField] List<QnASet> SampleQnA;
@@ -129,7 +129,8 @@ public class SelectionGameManager : MonoBehaviour
     public void PlayerSound()
     {
         AudioManager.Instance.PlaySFX(currentAnimal);
-        TimeManager.instance.StartTimer(currentRound.ToString());
+        //TimeManager.instance.StartTimer(currentRound.ToString());
+        TimeManager.instance.StartTimer(currentAnimal);
     }
 
     public void OnCustomButtonClicked(CustomButton InButton)
@@ -140,7 +141,8 @@ public class SelectionGameManager : MonoBehaviour
         }
         else
         {
-            TimeManager.instance.StopTimer(currentRound.ToString());
+            //TimeManager.instance.StopTimer(currentRound.ToString());
+            TimeManager.instance.StopTimer(currentAnimal);
             InButton.SetResult(true);
             StartCoroutine(CorrectAnswer());   
         }
@@ -187,5 +189,15 @@ public class SelectionGameManager : MonoBehaviour
         CanvasGround.DOFade(0, 1f).SetUpdate(true);
         //await MusicSettingPopupPanel.DOAnchorPosY(DefaultEndPosition.y, duration).SetUpdate(true).AsyncWaitForCompletion();
         await RecordPopupPanel.DOAnchorPosY(1000f, 1f).SetEase(Ease.InOutQuint).AsyncWaitForCompletion();
+    }
+
+    public void LoadData(GameData data)
+    {
+       
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        data.Level = 2;
     }
 }

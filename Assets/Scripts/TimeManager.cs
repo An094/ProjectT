@@ -59,25 +59,31 @@ public class TimeManager : MonoBehaviour, IDataPersistence
 
     public void LoadData(GameData data)
     {
-        foreach (var timer in data.LevelData)
-        {
-            timers[timer.Name].StartTime = timer.StartTime;
-            timers[timer.Name].EndTime = timer.EndTime;
-        }
+        //foreach (var timer in data.LevelData)
+        //{
+        //    timers[timer.Name].StartTime = timer.StartTime;
+        //    timers[timer.Name].EndTime = timer.EndTime;
+        //}
     }
 
     public void SaveData(ref GameData data)
     {
         int index = 0;
+        float duration = 0.0f;
         foreach (var timer in timers)
         {
-            LevelData level2Data = new LevelData();
-            level2Data.Name = timer.Key;
-            level2Data.StartTime = timer.Value.StartTime;
-            level2Data.EndTime = timer.Value.EndTime;
-            level2Data.Duration = level2Data.EndTime - level2Data.StartTime;
-            data.LevelData.Add(level2Data);
-            index++;
+            duration = timer.Value.EndTime - timer.Value.StartTime;
+            if (duration != 0f)
+            {
+                LevelData level2Data = new LevelData();
+                level2Data.Name = timer.Key;
+                //level2Data.StartTime = timer.Value.StartTime;
+                //level2Data.EndTime = timer.Value.EndTime;
+                level2Data.Duration = duration;
+                data.LevelData.Add(level2Data);
+                index++;
+            }
+           
         }
     }
 }

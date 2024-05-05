@@ -5,7 +5,7 @@ using DG.Tweening;
 using System.Threading.Tasks;
 using UnityEngine.SceneManagement;
 
-public class MatchGameManager : MonoBehaviour
+public class MatchGameManager : MonoBehaviour, IDataPersistence
 {
     public static MatchGameManager Instance { get; private set; }
 
@@ -97,12 +97,23 @@ public class MatchGameManager : MonoBehaviour
 
     public void Restart()
     {
+        DataPersistenceManager.Instance.SaveGame();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void PlayNextLevel()
     {
+        DataPersistenceManager.Instance.SaveGame();
         SceneManager.LoadScene(NextLevel);
     }
 
+    public void LoadData(GameData data)
+    {
+        
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        data.Level = 1;
+    }
 }

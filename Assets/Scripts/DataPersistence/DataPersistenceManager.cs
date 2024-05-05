@@ -73,4 +73,10 @@ public class DataPersistenceManager : MonoBehaviour
         FileDataHandler.Save(GameData);
     }
 
+    public GameData GetData()
+    {
+        LoadGame();
+        return this.GameData;
+    }
+
 }

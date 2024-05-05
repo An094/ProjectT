@@ -25,7 +25,7 @@ public class ResultMatchGamePopup : MonoBehaviour
 
         float avgTime = TotalTime / recordLabelInfos.Count;
 
-        AvgTimeLabel.text = avgTime.ToString("0.##") + " s";
+        AvgTimeLabel.text = "AVG: " + avgTime.ToString("0.##") + " s";
     }
 
     private void Restart()

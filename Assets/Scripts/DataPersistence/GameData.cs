@@ -5,12 +5,14 @@ using UnityEngine;
 [System.Serializable]
 public class GameData
 {
+    public int Level;
     public List<LevelData> LevelData;
 
     //the values defined in this constructor will be the default values
     //the game starts with when there's no data to load
     public GameData()
     { 
+        this.Level = 0;
         this.LevelData = new List<LevelData>();
     }
 }
@@ -25,8 +27,8 @@ public class GameData
 public class LevelData
 {
     public string Name;
-    public float StartTime;
-    public float EndTime;
+    //public float StartTime;
+    //public float EndTime;
     public float Duration;
 
     //the values defined in this constructor will be the default values
@@ -34,8 +36,8 @@ public class LevelData
     public LevelData()
     {
         this.Name = "none";
-        this.StartTime = 0f;
-        this.EndTime = 0f;
+        //this.StartTime = 0f;
+        //this.EndTime = 0f;
         this.Duration = 0f;
     }
 }
