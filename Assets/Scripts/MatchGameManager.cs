@@ -4,6 +4,7 @@ using UnityEngine;
 using DG.Tweening;
 using System.Threading.Tasks;
 using UnityEngine.SceneManagement;
+using System.Linq;
 
 public class MatchGameManager : MonoBehaviour, IDataPersistence
 {
@@ -107,6 +108,12 @@ public class MatchGameManager : MonoBehaviour, IDataPersistence
         SceneManager.LoadScene(NextLevel);
     }
 
+    public void GotoHome()
+    {
+        DataPersistenceManager.Instance.SaveGame();
+        SceneManager.LoadScene("MainMenu");
+    }
+
     public void LoadData(GameData data)
     {
         
@@ -114,6 +121,6 @@ public class MatchGameManager : MonoBehaviour, IDataPersistence
 
     public void SaveData(ref GameData data)
     {
-        data.Level = 1;
+        data.GetCurrentRecords().Level = 1;
     }
 }

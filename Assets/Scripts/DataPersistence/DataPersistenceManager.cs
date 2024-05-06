@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using System;
+using UnityEngine.SceneManagement;
+using TMPro.EditorUtilities;
+using Unity.VisualScripting;
 
 public class DataPersistenceManager : MonoBehaviour
 {
@@ -16,18 +19,46 @@ public class DataPersistenceManager : MonoBehaviour
 
     private void Awake()
     {
-        if(Instance != null)
+        if (Instance != null)
         {
             Debug.LogError("Found more than one Data Persistence Manager in the scene");
+            Destroy(this.gameObject);
+            return;
         }
         Instance = this;
+        DontDestroyOnLoad(this.gameObject); ;
+
+        this.FileDataHandler = new FileDataHandler(Application.persistentDataPath, fileName);
+    }
+
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+        SceneManager.sceneUnloaded += OnSceneUnloaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+        SceneManager.sceneUnloaded -= OnSceneUnloaded;
+    }
+
+    public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        this.DataPersistenceObjects = FindAllDataPersistenceObjects();
+        LoadGame();
+    }
+
+    public void OnSceneUnloaded(Scene currentScene)
+    {
+        SaveGame();
     }
 
     private void Start()
     {
-        this.FileDataHandler = new FileDataHandler(Application.persistentDataPath, fileName);
-        this.DataPersistenceObjects = FindAllDataPersistenceObjects();
-        LoadGame();
+        //TODO
+        GameData.AddNewRecord();
+       
     }
 
     private List<IDataPersistence> FindAllDataPersistenceObjects()

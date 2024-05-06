@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class TimeManager : MonoBehaviour, IDataPersistence
@@ -80,7 +81,7 @@ public class TimeManager : MonoBehaviour, IDataPersistence
                 //level2Data.StartTime = timer.Value.StartTime;
                 //level2Data.EndTime = timer.Value.EndTime;
                 level2Data.Duration = duration;
-                data.LevelData.Add(level2Data);
+                data.GetCurrentRecords().LevelData.Add(level2Data);
                 index++;
             }
            

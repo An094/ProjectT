@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 [System.Serializable]
 public class QnASet
@@ -198,6 +199,18 @@ public class SelectionGameManager : MonoBehaviour, IDataPersistence
 
     public void SaveData(ref GameData data)
     {
-        data.Level = 2;
+        data.GetCurrentRecords().Level = 2;
+    }
+
+    public void GotoHome()
+    {
+        DataPersistenceManager.Instance.SaveGame();
+        SceneManager.LoadScene("MainMenu");
+    }
+
+    public void Restart()
+    {
+        DataPersistenceManager.Instance.SaveGame();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

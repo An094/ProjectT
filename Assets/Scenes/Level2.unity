@@ -878,6 +878,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1910612466}
     m_Modifications:
+    - target: {fileID: 37277869607541270, guid: bb0162d381c23b74da0f6d2a0f235e22, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 422947791}
+    - target: {fileID: 37277869607541270, guid: bb0162d381c23b74da0f6d2a0f235e22, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: GotoHome
+      objectReference: {fileID: 0}
+    - target: {fileID: 37277869607541270, guid: bb0162d381c23b74da0f6d2a0f235e22, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: SelectionGameManager, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 255849910915650451, guid: bb0162d381c23b74da0f6d2a0f235e22, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -978,13 +990,37 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: -183
       objectReference: {fileID: 0}
+    - target: {fileID: 3169825010321076639, guid: bb0162d381c23b74da0f6d2a0f235e22, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 115
+      objectReference: {fileID: 0}
     - target: {fileID: 3942493208989139721, guid: bb0162d381c23b74da0f6d2a0f235e22, type: 3}
       propertyPath: m_Name
       value: Popups
       objectReference: {fileID: 0}
+    - target: {fileID: 4333895175991224053, guid: bb0162d381c23b74da0f6d2a0f235e22, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 515
+      objectReference: {fileID: 0}
     - target: {fileID: 4473011011770735479, guid: bb0162d381c23b74da0f6d2a0f235e22, type: 3}
       propertyPath: m_Name
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6040798077472628656, guid: bb0162d381c23b74da0f6d2a0f235e22, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6040798077472628656, guid: bb0162d381c23b74da0f6d2a0f235e22, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 422947791}
+    - target: {fileID: 6040798077472628656, guid: bb0162d381c23b74da0f6d2a0f235e22, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Restart
+      objectReference: {fileID: 0}
+    - target: {fileID: 6040798077472628656, guid: bb0162d381c23b74da0f6d2a0f235e22, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: SelectionGameManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 6071952624937923956, guid: bb0162d381c23b74da0f6d2a0f235e22, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -1020,6 +1056,7 @@ PrefabInstance:
     - {fileID: 5717951940164564739, guid: bb0162d381c23b74da0f6d2a0f235e22, type: 3}
     - {fileID: 7878138225826495294, guid: bb0162d381c23b74da0f6d2a0f235e22, type: 3}
     - {fileID: 5761145576592807457, guid: bb0162d381c23b74da0f6d2a0f235e22, type: 3}
+    - {fileID: 4871873533904556631, guid: bb0162d381c23b74da0f6d2a0f235e22, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 4634731532768279688, guid: bb0162d381c23b74da0f6d2a0f235e22, type: 3}
       insertIndex: -1

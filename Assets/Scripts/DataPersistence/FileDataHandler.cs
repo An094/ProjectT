@@ -59,8 +59,8 @@ public class FileDataHandler
             string dataToStore = JsonUtility.ToJson(data, true);
 
             //write the serialized data to the file
-            using (FileStream stream = new FileStream(fullPath, FileMode.Append))
-            //using (FileStream stream = new FileStream(fullPath, FileMode.Open))
+            //using (FileStream stream = new FileStream(fullPath, FileMode.Append))
+            using (FileStream stream = new FileStream(fullPath, FileMode.OpenOrCreate))
             {
                 using (StreamWriter writer = new StreamWriter(stream))
                 {
