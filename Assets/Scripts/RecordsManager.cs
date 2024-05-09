@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -10,6 +11,8 @@ public class RecordsManager : MonoBehaviour
     [SerializeField] private GameObject Content;
     [SerializeField] private GameObject Level1RecordTemplate;
     [SerializeField] private GameObject Level2RecordTemplate;
+    [SerializeField] private TextMeshProUGUI Name;
+    [SerializeField] private TextMeshProUGUI Age;
 
     private void OnEnable()
     {
@@ -24,6 +27,10 @@ public class RecordsManager : MonoBehaviour
     private void Start()
     {
         OnTabChanged(1);
+
+        GameData gameData = DataPersistenceManager.Instance.GetData();
+        Name.text = DataPersistenceManager.SelectedProfileId;
+        Age.text = gameData.Age.ToString();
     }
 
     private void OnTabChanged(int index)
@@ -37,6 +44,8 @@ public class RecordsManager : MonoBehaviour
         GameData gameData = DataPersistenceManager.Instance.GetData();
 
 
+        int IndexOfRecord1 = 1;
+        int IndexOfRecord2 = 1;
         foreach (var record in gameData.Records)
         {
             if (record.Level == index)
@@ -53,7 +62,7 @@ public class RecordsManager : MonoBehaviour
                     float MonkeyTime = 0.0f;
                     float RabbitTime = 0.0f;
                     float PorcupineTime = 0.0f;
-
+                    long UpdateTime = record.LastUpdate;
                     if (lv1Record != null)
                     {
                         LevelData MonkeyData = record.LevelData.FirstOrDefault(p => p.Name == "Monkey");
@@ -81,7 +90,8 @@ public class RecordsManager : MonoBehaviour
                             PorcupineTime = PorcupineData.Duration;
                         }
 
-                        lv1Record.SetData(MonkeyTime, RabbitTime, PorcupineTime);
+                        lv1Record.SetData(IndexOfRecord1, MonkeyTime, RabbitTime, PorcupineTime, UpdateTime);
+                        IndexOfRecord1++;
                     }
                 }
                 else
@@ -94,6 +104,7 @@ public class RecordsManager : MonoBehaviour
                     float DogTime = 0.0f;
                     float CatTime = 0.0f;
                     float PigTime = 0.0f;
+                    long UpateTime = record.LastUpdate;
 
                     if (lv1Record != null)
                     {
@@ -122,7 +133,8 @@ public class RecordsManager : MonoBehaviour
                             PigTime = PigData.Duration;
                         }
 
-                        lv1Record.SetData(DogTime, CatTime, PigTime);
+                        lv1Record.SetData(IndexOfRecord2, DogTime, CatTime, PigTime, UpateTime);
+                        IndexOfRecord2++;
                     }
                 }
                 

@@ -4,8 +4,6 @@ using UnityEngine;
 using System.Linq;
 using System;
 using UnityEngine.SceneManagement;
-using TMPro.EditorUtilities;
-using Unity.VisualScripting;
 
 public class DataPersistenceManager : MonoBehaviour
 {
@@ -15,6 +13,7 @@ public class DataPersistenceManager : MonoBehaviour
     private GameData GameData;
     private List<IDataPersistence> DataPersistenceObjects;
     private FileDataHandler FileDataHandler;
+    public static string SelectedProfileId = "";
     public static DataPersistenceManager Instance { get; private set; }
 
     private void Awake()
@@ -26,7 +25,7 @@ public class DataPersistenceManager : MonoBehaviour
             return;
         }
         Instance = this;
-        DontDestroyOnLoad(this.gameObject); ;
+        DontDestroyOnLoad(this.gameObject);
 
         this.FileDataHandler = new FileDataHandler(Application.persistentDataPath, fileName);
     }
@@ -80,7 +79,7 @@ public class DataPersistenceManager : MonoBehaviour
     public void LoadGame()
     {
         //Load any saved data from a file using the data handler
-        this.GameData = FileDataHandler.Load();
+        this.GameData = FileDataHandler.Load(SelectedProfileId);
 
         if (this.GameData == null)
         {
@@ -88,7 +87,11 @@ public class DataPersistenceManager : MonoBehaviour
             NewGame();
         }
 
-        foreach(IDataPersistence dataPersistenceObj in DataPersistenceObjects)
+
+        //Workaround
+        //this.DataPersistenceObjects = FindAllDataPersistenceObjects();
+
+        foreach (IDataPersistence dataPersistenceObj in DataPersistenceObjects)
         {
             dataPersistenceObj.LoadData(GameData);
         }
@@ -96,12 +99,14 @@ public class DataPersistenceManager : MonoBehaviour
 
     public void SaveGame()
     {
+        //Workaround
+        //this.DataPersistenceObjects = FindAllDataPersistenceObjects();
         foreach (IDataPersistence dataPersistenceObj in DataPersistenceObjects)
         {
             dataPersistenceObj.SaveData(ref GameData);
         }
 
-        FileDataHandler.Save(GameData);
+        FileDataHandler.Save(GameData, SelectedProfileId);
     }
 
     public GameData GetData()
@@ -110,4 +115,16 @@ public class DataPersistenceManager : MonoBehaviour
         return this.GameData;
     }
 
+    public Dictionary<string, GameData> GetAllProfilesGameData()
+    {
+        return FileDataHandler.LoadAllProfiles();
+    }
+
+    public void ChangeSelectedProfileId(string newProfileId)
+    {
+        // update the profile to use for saving and loading
+        SelectedProfileId = newProfileId;
+        // load the game, which will use that profile, updating our game data accordingly
+        LoadGame();
+    }
 }

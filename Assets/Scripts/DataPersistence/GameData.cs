@@ -6,12 +6,16 @@ using UnityEngine;
 [System.Serializable]
 public class GameData
 {
+    public string Gender;
+    public int Age;
     public List<RecordData> Records;
 
     //the values defined in this constructor will be the default values
     //the game starts with when there's no data to load
     public GameData()
-    { 
+    {
+        this.Gender = "Male";
+        this.Age = 0;
         this.Records = new List<RecordData>();
     }
 
@@ -30,6 +34,7 @@ public class GameData
 public class RecordData
 {
     public int Level;
+    public long LastUpdate;
     public List<LevelData> LevelData;
 
     //the values defined in this constructor will be the default values
@@ -37,6 +42,7 @@ public class RecordData
     public RecordData()
     {
         this.Level = 0;
+        this.LastUpdate = 0;
         this.LevelData = new List<LevelData>();
     }
 }

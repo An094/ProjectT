@@ -200,6 +200,7 @@ public class SelectionGameManager : MonoBehaviour, IDataPersistence
     public void SaveData(ref GameData data)
     {
         data.GetCurrentRecords().Level = 2;
+        data.GetCurrentRecords().LastUpdate = DateTime.Now.Ticks;
     }
 
     public void GotoHome()

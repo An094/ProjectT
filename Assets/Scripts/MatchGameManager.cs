@@ -5,6 +5,7 @@ using DG.Tweening;
 using System.Threading.Tasks;
 using UnityEngine.SceneManagement;
 using System.Linq;
+using System;
 
 public class MatchGameManager : MonoBehaviour, IDataPersistence
 {
@@ -122,5 +123,6 @@ public class MatchGameManager : MonoBehaviour, IDataPersistence
     public void SaveData(ref GameData data)
     {
         data.GetCurrentRecords().Level = 1;
+        data.GetCurrentRecords().LastUpdate = DateTime.Now.Ticks;
     }
 }
