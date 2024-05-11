@@ -132,6 +132,12 @@ public class SelectionGameManager : MonoBehaviour, IDataPersistence
         AudioManager.Instance.PlaySFX(currentAnimal);
         //TimeManager.instance.StartTimer(currentRound.ToString());
         TimeManager.instance.StartTimer(currentAnimal);
+
+        foreach(var button in customButtons)
+        {
+            button.SetEnable();
+        }
+
     }
 
     public void OnCustomButtonClicked(CustomButton InButton)

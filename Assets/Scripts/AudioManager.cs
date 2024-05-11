@@ -85,4 +85,16 @@ public class AudioManager : MonoBehaviour
         PlayerPrefs.SetFloat("SFXVolume", volume);
         sfxSource.volume = volume;
     }
+
+    public void TurnOnMusic()
+    {
+        musicSource.mute = false;
+        PlayerPrefs.SetInt("IsMusicMuted", 1);
+    }
+
+    public void TurnOffMusic()
+    {
+        musicSource.mute = true;
+        PlayerPrefs.SetInt("IsMusicMuted", 1);
+    }
 }

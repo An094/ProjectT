@@ -51,6 +51,7 @@ public class CustomButton : MonoBehaviour
     {
         IncorrectBackground.enabled = false;
         CorrectBackground.enabled = false;
+        Button.interactable = false;
     }
     public void SetAnimalData(string InAnimalData)
     {
@@ -62,5 +63,10 @@ public class CustomButton : MonoBehaviour
     private void OnButtonClicked()
     {
         OnCustomButtonClickEvent?.Invoke(this);
+    }
+
+    public void SetEnable()
+    {
+        Button.interactable = true;
     }
 }

@@ -122,7 +122,11 @@ public class MatchGameManager : MonoBehaviour, IDataPersistence
 
     public void SaveData(ref GameData data)
     {
+        data.Age = GlobalInfo.Age;
+        data.Gender = GlobalInfo.Gender;
+
         data.GetCurrentRecords().Level = 1;
         data.GetCurrentRecords().LastUpdate = DateTime.Now.Ticks;
+
     }
 }

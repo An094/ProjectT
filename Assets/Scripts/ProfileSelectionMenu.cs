@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class ProfileSelectionMenu : MonoBehaviour, IDataPersistence
+public class ProfileSelectionMenu : MonoBehaviour//, IDataPersistence
 {
     [SerializeField] TMPro.TMP_InputField InputField;
     [SerializeField] TMPro.TMP_InputField AgeField;
@@ -14,16 +14,16 @@ public class ProfileSelectionMenu : MonoBehaviour, IDataPersistence
 
     private string Gender;
     private int Age;
-    public void LoadData(GameData data)
-    {
+//    public void LoadData(GameData data)
+//    {
         
-    }
+//    }
 
-    public void SaveData(ref GameData data)
-    {
-        data.Gender = this.Gender;
-        data.Age = this.Age;
-    }
+//    public void SaveData(ref GameData data)
+//    {
+////        data.Gender = this.Gender;
+////        data.Age = this.Age;
+//    }
 
     public void SelectProfile()
     {
@@ -44,7 +44,16 @@ public class ProfileSelectionMenu : MonoBehaviour, IDataPersistence
 
         Age = Convert.ToInt32(AgeField.text);
 
-        DataPersistenceManager.Instance.SaveGame();
+        //DataPersistenceManager.Instance.SaveGame();
+        //if(profilesGameData.ContainsKey(ProfileId))
+        //{
+        //    profilesGameData[ProfileId].Age = Age;
+        //    profilesGameData[ProfileId].Gender = Gender;
+        //    //DataPersistenceManager.Instance.GetData().Gender = Gender;
+        //    //DataPersistenceManager.Instance.GetData().Age = Age;
+        //}
+        GlobalInfo.Age = Age;
+        GlobalInfo.Gender = Gender;
 
         SceneManager.LoadScene("MainMenu");
     }

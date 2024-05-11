@@ -55,8 +55,9 @@ public class RecordsManager : MonoBehaviour
                 //TODO: code smell!!!! Fix this plz
                 if(index == 1)
                 {
-                    RecordItem = Instantiate(Level1RecordTemplate);
-                    RecordItem.transform.SetParent(Content.transform);
+                    RecordItem = Instantiate(Level1RecordTemplate, Content.transform, false);
+                    //RecordItem = Instantiate(Level1RecordTemplate);
+                    //RecordItem.transform.SetParent(Content.transform);
                     Level1Record lv1Record = RecordItem.GetComponent<Level1Record>();
 
                     float MonkeyTime = 0.0f;
@@ -96,9 +97,10 @@ public class RecordsManager : MonoBehaviour
                 }
                 else
                 {
-                    RecordItem = Instantiate(Level2RecordTemplate);
+                    //RecordItem = Instantiate(Level2RecordTemplate);
+                    RecordItem = Instantiate(Level2RecordTemplate, Content.transform, false);
 
-                    RecordItem.transform.SetParent(Content.transform);
+                    //RecordItem.transform.SetParent(Content.transform);
                     Level2Record lv1Record = RecordItem.GetComponent<Level2Record>();
 
                     float DogTime = 0.0f;
